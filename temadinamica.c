@@ -12,22 +12,21 @@ Nume: Rusănescu Gabriel
 
 int calculeaza_trasee(int n, int m){
     if(n<=0 || m<=0) return 0;
-    int **dp =(int **)malloc(n * sizeof(int *));
-    if (dp == NULL) return 0;
+    int **dp=(int **)malloc(n * sizeof(int *));
+    if(dp==NULL) return 0;
     for(int i=0; i<n; i++){
-        dp[i] =(int *)malloc(m * sizeof(int));
+        dp[i]=(int *)malloc(m * sizeof(int));
     }
-
     for(int i=0; i<n; i++){
-        for(int j=0; j<m; j++) {
-            if(i==0 || j==0) {
+        for(int j=0; j<m; j++){
+            if(i==0 || j==0){
                 dp[i][j]=1;
             }else{
-                dp[i][j]=(dp[i-1][j] + dp[i][j-1])%MODULO;
+                dp[i][j]=(dp[i-1][j] + dp[i][j-1]) % MODULO;
             }
         }
     }
-    int rezultat = dp[n-1][m-1];
+    int rezultat=dp[n-1][m-1];
     for(int i=0; i<n; i++){
         free(dp[i]);
     }
@@ -82,7 +81,6 @@ int main(){
     rezultat=calculeaza_trasee(n, m);
     printf("Test3 (n=%d, m=%d). Rezultat=%d\n", n, m, rezultat);
     assert(rezultat==6);
-
     printf("\nToate cele 3 teste (cu verificari assert) au fost cu succes!\n");
     return 0;
 }
